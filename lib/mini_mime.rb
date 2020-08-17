@@ -120,6 +120,9 @@ module MiniMime
             data
           end
         end
+      rescue => e
+        # Ignore non-serious error that occurs on Windows only
+        puts e.full_message
       end
 
       # lifted from marcandre/backports
@@ -147,6 +150,9 @@ module MiniMime
       def resolve(row)
         @file.seek(row*@row_length)
         Info.new(@file.readline)
+      rescue => e
+        # Ignore non-serious error that occurs on Windows only
+        puts e.full_message
       end
     end
 
